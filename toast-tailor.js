@@ -154,6 +154,37 @@ function make_toast(part) {
     return toast;
 };
 
+function make_ring_toast(rx, ry, range, i){
+
+    var angleIncrement = 2*Math.PI / range;
+
+    var toast = {};
+
+   
+    toast.x = rx* Math.cos((angleIncrement * i) );
+    toast.y = 0;
+    toast.z = rx* Math.sin((angleIncrement * i));
+    toast.rx = 0;
+    toast.ry = Math.sin((angleIncrement * i));
+    toast.rz = 0;
+    
+    return toast;
+};
+
+function make_ring(min_num, max_num, part){
+    var piece = [];
+    var radiusX = (Math.random() * max_num) +min_num;
+    var radiusY = Math.floor((Math.random() * max_num)) +min_num;
+    console.log(radiusX);
+    var range = Math.ceil(5* Math.PI * radiusX);
+    console.log(range);
+    var i = 0;
+    for (i = 0; i < range; i++) {
+        piece.push(make_ring_toast(radiusX, radiusY, range, i));
+    }
+    return piece;
+
+};
 
 function make_piece(min_num, max_num, part) {
     var i = 0;
@@ -165,12 +196,25 @@ function make_piece(min_num, max_num, part) {
     return piece;
 };
 
+
 function make_clothes() {
+    // var outfit = {
+    //     "head": make_piece(0, 3, "head"),
+    //     "torso": make_piece(10, 35, "torso"),
+    //     "pants": make_piece(5, 15, "pants"),
+    //     "shoes": make_piece(0, 3, "shoes")
+    // };
+
+
     var outfit = {
-        "head": make_piece(0, 3, "head"),
-        "torso": make_piece(10, 35, "torso"),
-        "pants": make_piece(5, 15, "pants"),
-        "shoes": make_piece(0, 3, "shoes")
+        "head": make_ring(0, 0.2, "head"),
+        "spine2": make_ring(0.2, 0.3, "spine2"),
+        "spine1": make_ring(0.2, 0.3, "spine1"),
+        "spine": make_ring(0.2, 0.3, "spine"),
+        "hips": make_ring(0.2, 0.3, "hips"),
+        "leftupleg": make_ring(0, 0.2, "leftupleg"),
+        "leftleg": make_ring(0, 0.2, "leftleg"),
+        "leftfoot": make_ring(0, 0.1, "leftfoot")
     };
     return outfit;
 };
@@ -202,7 +246,7 @@ function test() {
              var toast = {
                 modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
                 jointName: "Head",
-                translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                translation: {"x": child[part][t].x, "y": child[part][t].y+0.1, "z": child[part][t].z},
                 rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
                 scale: 0.01,
                 isSoft: false
@@ -215,7 +259,7 @@ function test() {
                  toast.isSoft);
             }
         }
-        if(part == "torso"){
+        if(part == "spine2"){
             var t = 0;
             for(t = 0; t < child[part].length; t++){
              var toast = {
@@ -234,12 +278,73 @@ function test() {
                  toast.isSoft);
              }
         }
-        if(part == "pants"){
+        if(part == "spine1"){
             var t = 0;
             for(t = 0; t < child[part].length; t++){
              var toast = {
                 modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
-                jointName: "RightLeg",
+                jointName: "Spine1",
+                translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                scale: 0.01,
+                isSoft: false
+            };
+            MyAvatar.attach(toast.modelURL,
+                 toast.jointName,
+                 toast.translation,
+                 toast.rotation,
+                 toast.scale,
+                 toast.isSoft);
+
+        }
+    }
+        if(part == "spine"){
+            var t = 0;
+            for(t = 0; t < child[part].length; t++){
+             var toast = {
+                modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                jointName: "Spine",
+                translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                scale: 0.01,
+                isSoft: false
+            };
+            MyAvatar.attach(toast.modelURL,
+                 toast.jointName,
+                 toast.translation,
+                 toast.rotation,
+                 toast.scale,
+                 toast.isSoft);
+           
+            }
+        }
+
+        if(part == "hips"){
+            var t = 0;
+            for(t = 0; t < child[part].length; t++){
+             var toast = {
+                modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                jointName: "Hips",
+                translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                scale: 0.01,
+                isSoft: false
+            };
+            MyAvatar.attach(toast.modelURL,
+                 toast.jointName,
+                 toast.translation,
+                 toast.rotation,
+                 toast.scale,
+                 toast.isSoft);
+           
+            }
+        }
+        if(part == "leftupleg"){
+            var t = 0;
+            for(t = 0; t < child[part].length; t++){
+             var toast = {
+                modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                jointName: "LeftUpLeg",
                 translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                 rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
                 scale: 0.01,
@@ -254,7 +359,7 @@ function test() {
 
             var toast2 = {
                 modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
-                jointName: "LeftLeg",
+                jointName: "RightUpLeg",
                 translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                 rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
                 scale: 0.01,
@@ -266,14 +371,15 @@ function test() {
                  toast2.rotation,
                  toast2.scale,
                  toast2.isSoft);
+           
             }
         }
-        if(part == "shoes"){
+        if(part == "leftleg"){
             var t = 0;
             for(t = 0; t < child[part].length; t++){
              var toast = {
                 modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
-                jointName: "LeftToeBase",
+                jointName: "LeftLeg",
                 translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                 rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
                 scale: 0.01,
@@ -285,9 +391,10 @@ function test() {
                  toast.rotation,
                  toast.scale,
                  toast.isSoft);
+
             var toast2 = {
                 modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
-                jointName: "RightToeBase",
+                jointName: "RightLeg",
                 translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                 rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
                 scale: 0.01,
@@ -299,6 +406,42 @@ function test() {
                  toast2.rotation,
                  toast2.scale,
                  toast2.isSoft);
+           
+            }
+        }
+        if(part == "leftfoot"){
+            var t = 0;
+            for(t = 0; t < child[part].length; t++){
+             var toast = {
+                modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                jointName: "LeftFoot",
+                translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                scale: 0.01,
+                isSoft: false
+            };
+            MyAvatar.attach(toast.modelURL,
+                 toast.jointName,
+                 toast.translation,
+                 toast.rotation,
+                 toast.scale,
+                 toast.isSoft);
+
+            var toast2 = {
+                modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                jointName: "RightFoot",
+                translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                scale: 0.01,
+                isSoft: false
+            };
+            MyAvatar.attach(toast2.modelURL,
+                 toast2.jointName,
+                 toast2.translation,
+                 toast2.rotation,
+                 toast2.scale,
+                 toast2.isSoft);
+           
             }
         }
     }
