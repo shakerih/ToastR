@@ -1,3 +1,6 @@
+var library = [];
+
+var currpiece = {};
 
 // class EvolutionaryAlgorithm {
 function startEA(pop_size) {
@@ -237,6 +240,7 @@ function test() {
     
     var structure = Object.keys(child);
 
+    currpiece = child;
     var idx;
     for (idx in structure) {
         var part = structure[idx];
@@ -246,7 +250,7 @@ function test() {
              var toast = {
                 modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
                 jointName: "Head",
-                translation: {"x": child[part][t].x, "y": child[part][t].y+0.1, "z": child[part][t].z},
+                translation: {"x": child[part][t].x, "y": child[part][t].y+0.3, "z": child[part][t].z},
                 rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
                 scale: 0.01,
                 isSoft: false
@@ -451,6 +455,20 @@ function test() {
 }
 
 test();
+
+Controller.mouseReleaseEvent.connect(function (event) {
+    print(JSON.stringify(event));
+    if(event.isLeftButton){
+        if(event.x > 1000){
+            console.log("KEEP");
+            library.push(currpiece);
+        }
+        else{
+            console.log("DESTROY");
+        }
+    }
+});
+ 
 //*******************************************************
 Script.setTimeout(function () { //wait for the object to be created
 
