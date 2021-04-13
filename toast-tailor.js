@@ -3,7 +3,7 @@ var library = [];
 var currpiece = {};
 
 
-
+var toastyArray = ["https://files.tivolicloud.com/hanieh/toast-smaller.gltf", "https://files.tivolicloud.com/hanieh/toast-smaller-mediumdark.gltf", "https://files.tivolicloud.com/hanieh/toast-smaller-burnt.gltf"];
 // class EvolutionaryAlgorithm {
 function startEA(pop_size) {
     pop = [];
@@ -162,10 +162,11 @@ function test() {
     for (idx in structure) {
         var part = structure[idx];
         if (part == "head") {
+            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
             for (t = 0; t < child[part].length; t++) {
                 var toast = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "Head",
                     translation: {"x": child[part][t].x, "y": child[part][t].y + 0.3, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -181,10 +182,11 @@ function test() {
             }
         }
         if (part == "spine2") {
+            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
             for (t = 0; t < child[part].length; t++) {
                 var toast = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "Spine2",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -200,10 +202,11 @@ function test() {
             }
         }
         if (part == "spine1") {
+                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
             for (t = 0; t < child[part].length; t++) {
                 var toast = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "Spine1",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -220,10 +223,11 @@ function test() {
             }
         }
         if (part == "spine") {
+                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
             for (t = 0; t < child[part].length; t++) {
                 var toast = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "Spine",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -241,10 +245,11 @@ function test() {
         }
 
         if (part == "hips") {
+            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
             for (t = 0; t < child[part].length; t++) {
                 var toast = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "Hips",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -261,10 +266,11 @@ function test() {
             }
         }
         if (part == "leftupleg") {
+            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
             for (t = 0; t < child[part].length; t++) {
                 var toast = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "LeftUpLeg",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -279,7 +285,7 @@ function test() {
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "RightUpLeg",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -296,10 +302,11 @@ function test() {
             }
         }
         if (part == "leftleg") {
+                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
             for (t = 0; t < child[part].length; t++) {
                 var toast = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "LeftLeg",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -314,7 +321,7 @@ function test() {
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "RightLeg",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -331,10 +338,11 @@ function test() {
             }
         }
         if (part == "leftfoot") {
+            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
             for (t = 0; t < child[part].length; t++) {
                 var toast = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "LeftFoot",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
@@ -349,7 +357,7 @@ function test() {
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: "https://files.tivolicloud.com/hanieh/toast-smaller.gltf",
+                    modelURL: toastyArray[toastiness],
                     jointName: "RightFoot",
                     translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
                     rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
