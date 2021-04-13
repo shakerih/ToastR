@@ -60,7 +60,7 @@ function mutate_dress(outfit) {
         part = structure[id];
         console.log(part, "---=1-2=-1=2=-=")
         if (Math.random() < 0.3){
-            outfit[part] = make_ring(values[part][0], values[part][1], values[part][2]);
+            outfit[part] = solid_ring(values[part][0], values[part][1], values[part][2]);
         }
     }
     return outfit;
@@ -90,7 +90,26 @@ function make_ring_toast(rx, ry, range, i) {
     return toast;
 };
 
-function make_ring(min_num, max_num, part) {
+function random_ring(min_rad, max_rad, min_toasts, max_toasts){
+    var num_toasts = Math.floor(Math.random() * max_toasts) + min_toasts;
+    var radiusX = (Math.random() * max_rad) + min_rad;
+    var radiusY = (Math.random() * max_rad) + min_rad;
+    var pis = (2*Math.PI)/num_toasts;
+    var poses = []
+    console.log(num_toasts);
+    for(var i=0; i < num_toasts; i++)
+    {
+        var t = i*pis;
+        var x = radiusX * Math.sin(t) + Math.random();
+        var z = radiusY * Math.cos(t) + Math.random();
+        poses.push([ x, Math.random, z]);
+    }
+    return poses;
+}
+
+
+
+function solid_ring(min_num, max_num, part) {
     var piece = [];
     var radiusX = (Math.random() * max_num) + min_num;
     var radiusY = Math.floor((Math.random() * max_num)) + min_num;
@@ -108,14 +127,14 @@ function make_ring(min_num, max_num, part) {
 
 function make_clothes() {
     var outfit = {
-        "head": make_ring(0, 0.2, "head"),
-        "spine2": make_ring(0.2, 0.3, "spine2"),
-        "spine1": make_ring(0.2, 0.3, "spine1"),
-        "spine": make_ring(0.2, 0.3, "spine"),
-        "hips": make_ring(0.2, 0.3, "hips"),
-        "leftupleg": make_ring(0, 0.2, "leftupleg"),
-        "leftleg": make_ring(0, 0.2, "leftleg"),
-        "leftfoot": make_ring(0, 0.1, "leftfoot")
+        "head": random_ring(0, 0.2, 0, 4),
+        "spine2": random_ring(0.2, 0.3, 3, 10),
+        "spine1": random_ring(0.2, 0.3, 3, 10),
+        "spine": random_ring(0.2, 0.3, 3,10),
+        "hips": random_ring(0.2, 0.3, 2, 8),
+        "leftupleg": random_ring(0, 0.2, 4, 8),
+        "leftleg": random_ring(0, 0.2, 2, 8),
+        "leftfoot": random_ring(0, 0.1, 0, 4)
     };
     return outfit;
 };
