@@ -55,7 +55,7 @@ function mutate_dress(outfit) {
 
     var structure = Object.keys(outfit);
     var part;
-    console.log(structure);
+    // console.log(structure);
     for (id in structure) {
         part = structure[id];
         console.log(part, "---=1-2=-1=2=-=")
@@ -139,23 +139,36 @@ function make_clothes() {
     return outfit;
 };
 
+function clearAttachments(){
+    var attachments = MyAvatar.getAttachmentData();
+    // for (var i = 0; i < attachments.length; i++) {
+    //     MyAvatar.detachOne(attachments[i].modelURL);
+    // }
+    console.log(attachments);
+    attachments = [];
+    MyAvatar.setAttachmentData(attachments);
+    console.log(MyAvatar.getAttachmentData());
+
+}
 
 function test() {
     var piece = make_clothes();
-    console.log(piece);
+    // console.log(piece);
 
     Chat.showMessage("Starting Test");
     var pop = startEA(6);
-    console.log(pop);
+    // console.log(pop);
     Chat.showMessage("----")
     child = crossover_dresses([pop[0], pop[1]]);
-    console.log(child);
+    // console.log(child);
     Chat.showMessage(child);
     Chat.showMessage("+++++");
     mutation = mutate_dress(child);
-    console.log(mutation);
+    // console.log(mutation);
 
     var structure = Object.keys(child);
+
+    clearAttachments();
 
     currpiece = child;
     var idx;
@@ -373,8 +386,8 @@ function test() {
 
             }
         }
-    }
 
+    }
 
     Chat.showMessage("Done");
 }
