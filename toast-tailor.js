@@ -1,5 +1,5 @@
 var library = [];
-
+var overlayLibrary = [];
 var currpiece = {};
 
 
@@ -392,6 +392,158 @@ function test() {
     Chat.showMessage("Done");
 }
 
+
+
+
+// var toolbar = Toolbars.getToolbar("com.highfidelity.interface.toolbar.system");
+// icon = toolbar.addTool({
+//     imageURL: "https://freesvg.org/img/1555442127.png",
+//     width: 100,
+//     height: 100,
+//     visible:true},false);
+
+var screenSize = Controller.getViewportDimensions();
+    desktopOverlay = Overlays.addOverlay("text", {
+                    text: "1",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay);
+
+  desktopOverlay2 = Overlays.addOverlay("text", {
+                    text: "2",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*2,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                }); 
+    overlayLibrary.push(desktopOverlay2);
+
+  desktopOverlay3 = Overlays.addOverlay("text", {
+                    text: "3",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*3,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay3);
+
+   desktopOverlay4 = Overlays.addOverlay("text", {
+                    text: "4",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*4,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay4);
+
+    desktopOverlay5 = Overlays.addOverlay("text", {
+                    text: "5",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*5,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay5);
+
+     desktopOverlay6 = Overlays.addOverlay("text", {
+                    text: "6",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*6,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay6);
+
+ desktopOverlay7 = Overlays.addOverlay("text", {
+                    text: "7",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*7,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay7);
+
+  desktopOverlay8 = Overlays.addOverlay("text", {
+                    text: "8",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*8,
+                    y: 24,
+                    font: { size: 24 },
+                    color:{red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay8);
+
+   desktopOverlay9 = Overlays.addOverlay("text", {
+                    text: "9",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*9,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay9);
+
+    desktopOverlay10 = Overlays.addOverlay("text", {
+                    text: "0",
+                    width: 3 * 24,
+                    height: 24,
+                    x: screenSize.x/11*10,
+                    y: 24,
+                    font: { size: 24 },
+                    color: {red: 50, green: 50, blue: 50},
+                    alpha: 1.0,
+                    backgroundAlpha: 0,
+                    visible: true
+                });
+    overlayLibrary.push(desktopOverlay10);
+
+
 test();
 
 Controller.mouseReleaseEvent.connect(function (event) {
@@ -400,13 +552,11 @@ Controller.mouseReleaseEvent.connect(function (event) {
         if (event.x > 1000) {
             console.log("KEEP");
             library.push(currpiece);
+            Overlays.editOverlay(overlayLibrary[library.length-1], {
+                color: { red: 255, green: 0, blue: 0 }
+            });
         } else {
             console.log("DESTROY");
         }
     }
 });
-
-//*******************************************************
-Script.setTimeout(function () { //wait for the object to be created
-
-}, 50);
