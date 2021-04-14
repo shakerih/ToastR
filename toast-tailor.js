@@ -544,6 +544,229 @@ var screenSize = Controller.getViewportDimensions();
     overlayLibrary.push(desktopOverlay10);
 
 
+
+function wear(child){
+    var structure = Object.keys(child);
+    var idx;
+    for (idx in structure) {
+        var part = structure[idx];
+        if (part == "head") {
+            var toastiness = Math.floor(Math.random() * (3) );
+            var t = 0;
+            for (t = 0; t < child[part].length; t++) {
+                var toast = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "Head",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y + 0.3, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast.modelURL,
+                    toast.jointName,
+                    toast.translation,
+                    toast.rotation,
+                    toast.scale,
+                    toast.isSoft);
+            }
+        }
+        if (part == "spine2") {
+            var toastiness = Math.floor(Math.random() * (3) );
+            var t = 0;
+            for (t = 0; t < child[part].length; t++) {
+                var toast = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "Spine2",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast.modelURL,
+                    toast.jointName,
+                    toast.translation,
+                    toast.rotation,
+                    toast.scale,
+                    toast.isSoft);
+            }
+        }
+        if (part == "spine1") {
+                var toastiness = Math.floor(Math.random() * (3) );
+            var t = 0;
+            for (t = 0; t < child[part].length; t++) {
+                var toast = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "Spine1",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast.modelURL,
+                    toast.jointName,
+                    toast.translation,
+                    toast.rotation,
+                    toast.scale,
+                    toast.isSoft);
+
+            }
+        }
+        if (part == "spine") {
+                var toastiness = Math.floor(Math.random() * (3) );
+            var t = 0;
+            for (t = 0; t < child[part].length; t++) {
+                var toast = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "Spine",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast.modelURL,
+                    toast.jointName,
+                    toast.translation,
+                    toast.rotation,
+                    toast.scale,
+                    toast.isSoft);
+
+            }
+        }
+
+        if (part == "hips") {
+            var toastiness = Math.floor(Math.random() * (3) );
+            var t = 0;
+            for (t = 0; t < child[part].length; t++) {
+                var toast = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "Hips",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast.modelURL,
+                    toast.jointName,
+                    toast.translation,
+                    toast.rotation,
+                    toast.scale,
+                    toast.isSoft);
+
+            }
+        }
+        if (part == "leftupleg") {
+            var toastiness = Math.floor(Math.random() * (3) );
+            var t = 0;
+            for (t = 0; t < child[part].length; t++) {
+                var toast = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "LeftUpLeg",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast.modelURL,
+                    toast.jointName,
+                    toast.translation,
+                    toast.rotation,
+                    toast.scale,
+                    toast.isSoft);
+
+                var toast2 = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "RightUpLeg",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast2.modelURL,
+                    toast2.jointName,
+                    toast2.translation,
+                    toast2.rotation,
+                    toast2.scale,
+                    toast2.isSoft);
+
+            }
+        }
+        if (part == "leftleg") {
+                var toastiness = Math.floor(Math.random() * (3) );
+            var t = 0;
+            for (t = 0; t < child[part].length; t++) {
+                var toast = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "LeftLeg",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast.modelURL,
+                    toast.jointName,
+                    toast.translation,
+                    toast.rotation,
+                    toast.scale,
+                    toast.isSoft);
+
+                var toast2 = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "RightLeg",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast2.modelURL,
+                    toast2.jointName,
+                    toast2.translation,
+                    toast2.rotation,
+                    toast2.scale,
+                    toast2.isSoft);
+
+            }
+        }
+        if (part == "leftfoot") {
+            var toastiness = Math.floor(Math.random() * (3) );
+            var t = 0;
+            for (t = 0; t < child[part].length; t++) {
+                var toast = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "LeftFoot",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast.modelURL,
+                    toast.jointName,
+                    toast.translation,
+                    toast.rotation,
+                    toast.scale,
+                    toast.isSoft);
+
+                var toast2 = {
+                    modelURL: toastyArray[toastiness],
+                    jointName: "RightFoot",
+                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
+                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    scale: 0.01,
+                    isSoft: false
+                };
+                MyAvatar.attach(toast2.modelURL,
+                    toast2.jointName,
+                    toast2.translation,
+                    toast2.rotation,
+                    toast2.scale,
+                    toast2.isSoft);
+
+            }
+        }
+
+    }
+}
+
+
 test();
 
 Controller.mouseReleaseEvent.connect(function (event) {
@@ -555,8 +778,47 @@ Controller.mouseReleaseEvent.connect(function (event) {
             Overlays.editOverlay(overlayLibrary[library.length-1], {
                 color: { red: 255, green: 0, blue: 0 }
             });
+            test();
         } else {
             console.log("DESTROY");
+            test();
         }
+    }
+});
+
+Controller.keyPressEvent.connect(function (event) {
+
+    key = event.text;
+
+    if(key == '1'){
+        clearAttachments();
+        wear(library[0]);
+    }else if(key == '2'){
+        clearAttachments();
+        wear(library[1]);
+    }else if(key == '3'){
+        clearAttachments();
+        wear(library[2]);
+    }else if(key == '4'){
+        clearAttachments();
+        wear(library[3]);
+    }else if(key == '5'){
+        clearAttachments();
+        wear(library[4]);
+    }else if(key == '6'){
+        clearAttachments();
+        wear(library[5]);
+    }else if(key == '7'){
+        clearAttachments();
+        wear(library[6]);
+    }else if(key == '8'){
+        clearAttachments();
+        wear(library[7]);
+    }else if(key == '9'){
+        clearAttachments();
+        wear(library[8]);
+    }else if(key == '0'){
+        clearAttachments();
+        wear(library[9]);
     }
 });
