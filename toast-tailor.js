@@ -1,7 +1,7 @@
 var library = [];
 var overlayLibrary = [];
 var currpiece = {};
-
+var combineList = [];
 
 var toastyArray = ["https://files.tivolicloud.com/hanieh/toast-smaller.gltf", "https://files.tivolicloud.com/hanieh/toast-smaller-mediumdark.gltf", "https://files.tivolicloud.com/hanieh/toast-smaller-burnt.gltf"];
 // class EvolutionaryAlgorithm {
@@ -402,54 +402,12 @@ function test() {
 //     height: 100,
 //     visible:true},false);
 
-var screenSize = Controller.getViewportDimensions();
-    desktopOverlay = Overlays.addOverlay("text", {
-                    text: "1",
-                    width: 3 * 24,
-                    height: 24,
-                    x: screenSize.x/11,
-                    y: 24,
-                    font: { size: 24 },
-                    color: {red: 50, green: 50, blue: 50},
-                    alpha: 1.0,
-                    backgroundAlpha: 0,
-                    visible: true
-                });
-    overlayLibrary.push(desktopOverlay);
-
-  desktopOverlay2 = Overlays.addOverlay("text", {
-                    text: "2",
-                    width: 3 * 24,
-                    height: 24,
-                    x: screenSize.x/11*2,
-                    y: 24,
-                    font: { size: 24 },
-                    color: {red: 50, green: 50, blue: 50},
-                    alpha: 1.0,
-                    backgroundAlpha: 0,
-                    visible: true
-                }); 
-    overlayLibrary.push(desktopOverlay2);
-
-  desktopOverlay3 = Overlays.addOverlay("text", {
-                    text: "3",
-                    width: 3 * 24,
-                    height: 24,
-                    x: screenSize.x/11*3,
-                    y: 24,
-                    font: { size: 24 },
-                    color: {red: 50, green: 50, blue: 50},
-                    alpha: 1.0,
-                    backgroundAlpha: 0,
-                    visible: true
-                });
-    overlayLibrary.push(desktopOverlay3);
-
+    var screenSize = Controller.getViewportDimensions();
    desktopOverlay4 = Overlays.addOverlay("text", {
                     text: "4",
                     width: 3 * 24,
                     height: 24,
-                    x: screenSize.x/11*4,
+                    x: screenSize.x/11*3,
                     y: 24,
                     font: { size: 24 },
                     color: {red: 50, green: 50, blue: 50},
@@ -463,7 +421,7 @@ var screenSize = Controller.getViewportDimensions();
                     text: "5",
                     width: 3 * 24,
                     height: 24,
-                    x: screenSize.x/11*5,
+                    x: screenSize.x/11*4,
                     y: 24,
                     font: { size: 24 },
                     color: {red: 50, green: 50, blue: 50},
@@ -477,7 +435,7 @@ var screenSize = Controller.getViewportDimensions();
                     text: "6",
                     width: 3 * 24,
                     height: 24,
-                    x: screenSize.x/11*6,
+                    x: screenSize.x/11*5,
                     y: 24,
                     font: { size: 24 },
                     color: {red: 50, green: 50, blue: 50},
@@ -491,7 +449,7 @@ var screenSize = Controller.getViewportDimensions();
                     text: "7",
                     width: 3 * 24,
                     height: 24,
-                    x: screenSize.x/11*7,
+                    x: screenSize.x/11*6,
                     y: 24,
                     font: { size: 24 },
                     color: {red: 50, green: 50, blue: 50},
@@ -505,7 +463,7 @@ var screenSize = Controller.getViewportDimensions();
                     text: "8",
                     width: 3 * 24,
                     height: 24,
-                    x: screenSize.x/11*8,
+                    x: screenSize.x/11*7,
                     y: 24,
                     font: { size: 24 },
                     color:{red: 50, green: 50, blue: 50},
@@ -519,7 +477,7 @@ var screenSize = Controller.getViewportDimensions();
                     text: "9",
                     width: 3 * 24,
                     height: 24,
-                    x: screenSize.x/11*9,
+                    x: screenSize.x/11*8,
                     y: 24,
                     font: { size: 24 },
                     color: {red: 50, green: 50, blue: 50},
@@ -533,7 +491,7 @@ var screenSize = Controller.getViewportDimensions();
                     text: "0",
                     width: 3 * 24,
                     height: 24,
-                    x: screenSize.x/11*10,
+                    x: screenSize.x/11*9,
                     y: 24,
                     font: { size: 24 },
                     color: {red: 50, green: 50, blue: 50},
@@ -789,36 +747,91 @@ Controller.mouseReleaseEvent.connect(function (event) {
 Controller.keyPressEvent.connect(function (event) {
 
     key = event.text;
+    if(!event.isShifted){
+        if(key == '4'){
+            clearAttachments();
+            wear(library[0]);
+        }else if(key == '5'){
+            clearAttachments();
+            wear(library[1]);
+        }else if(key == '6'){
+            clearAttachments();
+            wear(library[2]);
+        }else if(key == '7'){
+            clearAttachments();
+            wear(library[3]);
+        }else if(key == '8'){
+            clearAttachments();
+            wear(library[4]);
+        }else if(key == '9'){
+            clearAttachments();
+            wear(library[5]);
+        }else if(key == '0'){
+            clearAttachments();
+            wear(library[6]);
+        }
+    }else{
+        if(key == '$' && library.length > 0){
+            Overlays.editOverlay(overlayLibrary[0], {
+                color: { red: 255, green: 255, blue: 0 }
+            });
 
-    if(key == '1'){
-        clearAttachments();
-        wear(library[0]);
-    }else if(key == '2'){
-        clearAttachments();
-        wear(library[1]);
-    }else if(key == '3'){
-        clearAttachments();
-        wear(library[2]);
-    }else if(key == '4'){
-        clearAttachments();
-        wear(library[3]);
-    }else if(key == '5'){
-        clearAttachments();
-        wear(library[4]);
-    }else if(key == '6'){
-        clearAttachments();
-        wear(library[5]);
-    }else if(key == '7'){
-        clearAttachments();
-        wear(library[6]);
-    }else if(key == '8'){
-        clearAttachments();
-        wear(library[7]);
-    }else if(key == '9'){
-        clearAttachments();
-        wear(library[8]);
-    }else if(key == '0'){
-        clearAttachments();
-        wear(library[9]);
+            combineList.push(library[0]);
+        }else if(key == '%'&& library.length > 1){
+            Overlays.editOverlay(overlayLibrary[1], {
+                color: { red: 255, green: 255, blue: 0 }
+            });
+            combineList.push(library[1]);
+        }else if(key == '^'&& library.length > 2){
+            Overlays.editOverlay(overlayLibrary[2], {
+                color: { red: 255, green: 255, blue: 0 }
+            });
+            combineList.push(library[2]);
+        }else if(key == '&'&& library.length > 3){
+            Overlays.editOverlay(overlayLibrary[3], {
+                color: { red: 255, green: 255, blue: 0 }
+            });
+            combineList.push(library[3]);
+        }else if(key == '*'&& library.length > 4){
+            Overlays.editOverlay(overlayLibrary[4], {
+                color: { red: 255, green: 255, blue: 0 }
+            });
+            combineList.push(library[4]);
+        }else if(key == '('&& library.length > 5){
+            Overlays.editOverlay(overlayLibrary[5], {
+                color: { red: 255, green: 255, blue: 0 }
+            });
+            combineList.push(library[5]);
+        }else if(key == ')'&& library.length > 6){
+            Overlays.editOverlay(overlayLibrary[6], {
+                color: { red: 255, green: 255, blue: 0 }
+            });
+            combineList.push(library[6]);
+        }
+    }
+
+
+    if(event.text == 'SPACE'){
+        var i = 0;
+        for(i = 0; i<overlayLibrary.length; i++){
+            Overlays.editOverlay(overlayLibrary[i], {
+                color: {red: 50, green: 50, blue: 50}
+            });
+        }
+
+        var libcopy = library;
+
+        library = libcopy.filter(function(n) {
+            return combineList.indexOf(n) !== -1;
+        });
+        for(i = 0; i<library.length; i++){
+            Overlays.editOverlay(overlayLibrary[i], {
+                color: {red: 255, green: 255, blue: 0}
+            });
+        }
+
+        child = crossover_dresses(combineList);
+        wear(child);
+        combineList = [];
     }
 });
