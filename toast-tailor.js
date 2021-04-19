@@ -55,12 +55,25 @@ function mutate_dress(outfit) {
 
     var structure = Object.keys(outfit);
     var part;
+    var toast;
     // console.log(structure);
     for (id in structure) {
         part = structure[id];
         console.log(part, "---=1-2=-1=2=-=")
-        if (Math.random() < 0.3){
+        if (Math.random() < 0.2){
             outfit[part] = solid_ring(values[part][0], values[part][1], values[part][2]);
+        }
+        if (Math.random() < 0.8){
+            for(var i=0; i<outfit[part].length; i++){
+                toast = outfit[part][i];
+                toast.x += Math.random()*0.001;
+                toast.y += Math.random()*0.001;
+                toast.z += Math.random()*0.001;
+                toast.rx += Math.random()*0.05;
+                toast.ry += Math.random()*0.05;
+                toast.rz += Math.random()*0.05;
+                toast.toastiness = Math.floor(Math.random()*3);
+            }
         }
     }
     return outfit;
@@ -73,7 +86,7 @@ function choose(choices) {
 };
 
 
-function make_ring_toast(rx, ry, range, i) {
+function make_ring_toast(rx, ry, range, i, toastiness) {
 
     var angleIncrement = 2 * Math.PI / range;
 
@@ -86,6 +99,7 @@ function make_ring_toast(rx, ry, range, i) {
     toast.rx = 0;
     toast.ry = Math.sin((angleIncrement * i));
     toast.rz = 0;
+    toast.toastiness = toastiness
 
     return toast;
 };
@@ -94,15 +108,24 @@ function random_ring(min_rad, max_rad, min_toasts, max_toasts){
     var num_toasts = Math.floor(Math.random() * max_toasts) + min_toasts;
     var radiusX = (Math.random() * max_rad) + min_rad;
     var radiusY = (Math.random() * max_rad) + min_rad;
-    var pis = (2*Math.PI)/num_toasts;
+    console.log(radiusX, radiusY)
+    var pis = (4*Math.PI)/num_toasts;
     var poses = []
     console.log(num_toasts);
+    var toast = {};
     for(var i=0; i < num_toasts; i++)
     {
+
         var t = i*pis;
-        var x = radiusX * Math.sin(t) + Math.random();
-        var z = radiusY * Math.cos(t) + Math.random();
-        poses.push([ x, Math.random, z]);
+        toast.x = radiusX * Math.sin(t);
+        toast.y = 0;
+        toast.z = radiusY * Math.cos(t);
+        toast.rx = 0;
+        toast.ry = Math.cos((t));
+        toast.rz = 0;
+        toast.toastiness = Math.floor(Math.random() * (3) );
+
+        poses.push(toast);
     }
     return poses;
 }
@@ -110,32 +133,84 @@ function random_ring(min_rad, max_rad, min_toasts, max_toasts){
 
 
 function solid_ring(min_num, max_num, part) {
-    var piece = [];
+    var currpiece = [];
     var radiusX = (Math.random() * max_num) + min_num;
     var radiusY = Math.floor((Math.random() * max_num)) + min_num;
     console.log(radiusX);
     var range = Math.ceil(5 * Math.PI * radiusX);
     console.log(range);
     var i = 0;
+    var toastiness = Math.floor(Math.random() * (3) );
     for (i = 0; i < range; i++) {
-        piece.push(make_ring_toast(radiusX, radiusY, range, i));
+        currpiece.push(make_ring_toast(radiusX, radiusY, range, i, toastiness));
     }
-    return piece;
+    return currpiece;
 
 };
 
 
 function make_clothes() {
-    var outfit = {
-        "head": random_ring(0, 0.2, 0, 4),
-        "spine2": random_ring(0.2, 0.3, 3, 10),
-        "spine1": random_ring(0.2, 0.3, 3, 10),
-        "spine": random_ring(0.2, 0.3, 3,10),
-        "hips": random_ring(0.2, 0.3, 2, 8),
-        "leftupleg": random_ring(0, 0.2, 4, 8),
-        "leftleg": random_ring(0, 0.2, 2, 8),
-        "leftfoot": random_ring(0, 0.1, 0, 4)
+
+    var values = {
+        "head": [0.1, 0.2, "head"],
+        "spine2": [0.2, 0.3, "spine2"],
+        "spine1": [0.2, 0.3, "spine1"],
+        "spine": [0.2, 0.3, "spine"],
+        "hips": [0.2, 0.3, "hips"],
+        "leftupleg": [0.1, 0.2, "leftupleg"],
+        "leftleg": [0.1, 0.2, "leftleg"],
+        "leftfoot": [0.1, 0.1, "leftfoot"]
+
     };
+
+    var outfit = {}
+
+    if (Math.random() < 0.5){
+        outfit.head = solid_ring(values["head"][0], values["head"][1], values["head"][2]);
+    }else{
+        outfit.head = random_ring(0.2, 0.2, 0, 4);
+    }
+
+    if (Math.random() < 0.5){
+        outfit.spine2 = solid_ring(values["spine2"][0], values["spine2"][1], values["spine2"][2]);
+    }else{
+        outfit.spine2 = random_ring(0.2, 0.3, 3, 10);
+    }
+
+    if (Math.random() < 0.5){
+        outfit.spine1 = solid_ring(values["spine1"][0], values["spine1"][1], values["spine1"][2]);
+    }else{
+        outfit.spine1 = random_ring(0.2, 0.3, 3, 10);
+    }
+
+    if (Math.random() < 0.5){
+        outfit.spine = solid_ring(values["spine"][0], values["spine"][1], values["spine"][2]);
+    }else{
+        outfit.spine = random_ring(0.2, 0.3, 3, 10);
+    }
+    if (Math.random() < 0.5){
+        outfit.hips = solid_ring(values["hips"][0], values["hips"][1], values["hips"][2]);
+    }else{
+        outfit.hips = random_ring(0.2, 0.3, 4, 8);
+    }
+
+    if (Math.random() < 0.5){
+        outfit.leftupleg = solid_ring(values["leftupleg"][0], values["leftupleg"][1], values["leftupleg"][2]);
+    }else{
+        outfit.leftupleg = random_ring(0.2, 0.2, 4, 8);
+    }
+    if (Math.random() < 0.5){
+        outfit.leftleg = solid_ring(values["leftleg"][0], values["leftleg"][1], values["leftleg"][2]);
+    }else{
+        outfit.leftleg = random_ring(0.2, 0.2, 4, 8);
+    }
+    if (Math.random() < 0.5){
+        outfit.leftfoot = solid_ring(values["leftfoot"][0], values["leftfoot"][1], values["leftfoot"][2]);
+    }else{
+        outfit.leftfoot = random_ring(0.1, 0.1, 0, 4);
+    }
+
+
     return outfit;
 };
 
@@ -151,38 +226,37 @@ function clearAttachments(){
 
 }
 
+function gen_outfit(){
+    if(combineList.length == 0 ){
+        return make_clothes()
+    }
+    return mutate_dress(crossover_dresses(combineList))
+
+
+}
+
 function test() {
-    var piece = make_clothes();
-    // console.log(piece);
 
-    Chat.showMessage("Starting Test");
-    var pop = startEA(6);
-    // console.log(pop);
-    Chat.showMessage("----")
-    child = crossover_dresses([pop[0], pop[1]]);
-    // console.log(child);
-    Chat.showMessage(child);
-    Chat.showMessage("+++++");
-    mutation = mutate_dress(child);
-    // console.log(mutation);
 
-    var structure = Object.keys(child);
+
+
+
+    currpiece = gen_outfit();
+
+    var structure = Object.keys(currpiece);
 
     clearAttachments();
-
-    currpiece = child;
     var idx;
     for (idx in structure) {
         var part = structure[idx];
         if (part == "head") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Head",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y + 0.3, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y + 0.3, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -195,14 +269,13 @@ function test() {
             }
         }
         if (part == "spine2") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Spine2",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -215,14 +288,13 @@ function test() {
             }
         }
         if (part == "spine1") {
-                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Spine1",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -236,14 +308,13 @@ function test() {
             }
         }
         if (part == "spine") {
-                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Spine",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -258,14 +329,13 @@ function test() {
         }
 
         if (part == "hips") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Hips",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -279,14 +349,13 @@ function test() {
             }
         }
         if (part == "leftupleg") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "LeftUpLeg",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -298,10 +367,10 @@ function test() {
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightUpLeg",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -315,14 +384,13 @@ function test() {
             }
         }
         if (part == "leftleg") {
-                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "LeftLeg",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -334,10 +402,10 @@ function test() {
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightLeg",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -351,14 +419,13 @@ function test() {
             }
         }
         if (part == "leftfoot") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "LeftFoot",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -370,10 +437,10 @@ function test() {
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightFoot",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -503,20 +570,19 @@ function test() {
 
 
 
-function wear(child){
-    var structure = Object.keys(child);
+function wear(currpiece){
+    var structure = Object.keys(currpiece);
     var idx;
     for (idx in structure) {
         var part = structure[idx];
         if (part == "head") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Head",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y + 0.3, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y + 0.3, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -529,14 +595,13 @@ function wear(child){
             }
         }
         if (part == "spine2") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Spine2",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -549,14 +614,13 @@ function wear(child){
             }
         }
         if (part == "spine1") {
-                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Spine1",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -570,14 +634,13 @@ function wear(child){
             }
         }
         if (part == "spine") {
-                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Spine",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -592,14 +655,13 @@ function wear(child){
         }
 
         if (part == "hips") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "Hips",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -613,14 +675,13 @@ function wear(child){
             }
         }
         if (part == "leftupleg") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "LeftUpLeg",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -632,10 +693,10 @@ function wear(child){
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightUpLeg",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -649,14 +710,13 @@ function wear(child){
             }
         }
         if (part == "leftleg") {
-                var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "LeftLeg",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -668,10 +728,10 @@ function wear(child){
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightLeg",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -685,14 +745,13 @@ function wear(child){
             }
         }
         if (part == "leftfoot") {
-            var toastiness = Math.floor(Math.random() * (3) );
             var t = 0;
-            for (t = 0; t < child[part].length; t++) {
+            for (t = 0; t < currpiece[part].length; t++) {
                 var toast = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "LeftFoot",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -704,10 +763,10 @@ function wear(child){
                     toast.isSoft);
 
                 var toast2 = {
-                    modelURL: toastyArray[toastiness],
+                    modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightFoot",
-                    translation: {"x": child[part][t].x, "y": child[part][t].y, "z": child[part][t].z},
-                    rotation: {"x": child[part][t].rx, "y": child[part][t].ry, "z": child[part][t].rz, "w": 1},
+                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -812,26 +871,32 @@ Controller.keyPressEvent.connect(function (event) {
 
 
     if(event.text == 'SPACE'){
+
+
         var i = 0;
         for(i = 0; i<overlayLibrary.length; i++){
             Overlays.editOverlay(overlayLibrary[i], {
                 color: {red: 50, green: 50, blue: 50}
             });
         }
+        library = [];
 
-        var libcopy = library;
-
-        library = libcopy.filter(function(n) {
-            return combineList.indexOf(n) !== -1;
-        });
-        for(i = 0; i<library.length; i++){
-            Overlays.editOverlay(overlayLibrary[i], {
-                color: {red: 255, green: 255, blue: 0}
-            });
+        // var libcopy = library;
+        //
+        // library = libcopy.filter(function(n) {
+        //     return combineList.indexOf(n) !== -1;
+        // });
+        // for(i = 0; i<library.length; i++){
+        //     Overlays.editOverlay(overlayLibrary[i], {
+        //         color: {red: 255, green: 255, blue: 0}
+        //     });
+        // }
+        if(combineList.length > 1) {
+            currpiece = crossover_dresses(combineList);
         }
 
-        child = crossover_dresses(combineList);
-        wear(child);
-        combineList = [];
+        clearAttachments();
+        wear(currpiece);
+        console.log(combineList.length, "combine length");
     }
 });
