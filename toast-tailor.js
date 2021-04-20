@@ -72,7 +72,7 @@ function mutate_dress(outfit) {
                 toast.rx += Math.random()*0.05;
                 toast.ry += Math.random()*0.05;
                 toast.rz += Math.random()*0.05;
-                toast.toastiness = Math.floor(Math.random()*toastyArray.length());
+                toast.toastiness = Math.floor(Math.random()*toastyArray.length);
             }
         }
     }
@@ -123,7 +123,7 @@ function random_ring(min_rad, max_rad, min_toasts, max_toasts){
         toast.rx = 0;
         toast.ry = Math.cos((t));
         toast.rz = 0;
-        toast.toastiness = Math.floor(Math.random() * toastyArray.length());
+        toast.toastiness = Math.floor(Math.random() * toastyArray.length);
 
         poses.push(toast);
     }
