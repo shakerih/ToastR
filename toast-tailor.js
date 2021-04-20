@@ -369,8 +369,8 @@ function test() {
                 var toast2 = {
                     modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightUpLeg",
-                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
-                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
+                    translation: {"x": -currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": -currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -439,8 +439,8 @@ function test() {
                 var toast2 = {
                     modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightFoot",
-                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
-                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
+                    translation: {"x": -currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": -currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -695,8 +695,8 @@ function wear(currpiece){
                 var toast2 = {
                     modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightUpLeg",
-                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
-                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
+                    translation: {"x": -currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": -currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -730,8 +730,8 @@ function wear(currpiece){
                 var toast2 = {
                     modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightLeg",
-                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
-                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
+                    translation: {"x": -currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": -currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
@@ -765,8 +765,8 @@ function wear(currpiece){
                 var toast2 = {
                     modelURL: toastyArray[currpiece[part][t].toastiness],
                     jointName: "RightFoot",
-                    translation: {"x": currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
-                    rotation: {"x": currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
+                    translation: {"x": -currpiece[part][t].x, "y": currpiece[part][t].y, "z": currpiece[part][t].z},
+                    rotation: {"x": -currpiece[part][t].rx, "y": currpiece[part][t].ry, "z": currpiece[part][t].rz, "w": 1},
                     scale: 0.01,
                     isSoft: false
                 };
